@@ -9,20 +9,20 @@ CREATE TABLE users (
   name VARCHAR(255) NOT NULL,
   username VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL
 
 );
 
 CREATE TABLE maps (
   id SERIAL PRIMARY KEY NOT NULL,
-  creator_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  creator_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   name VARCHAR(255) NOT NULL,
   city VARCHAR(255) NOT NULL,
   country VARCHAR(255) NOT NULL,
   image_url TEXT,
   latitude FLOAT NOT NULL,
   longitude FLOAT NOT NULL,
-  zoom INTEGER DEFAULT 8,
+  zoom INTEGER DEFAULT 8
 
 );
 
@@ -35,12 +35,12 @@ CREATE TABLE favourite_maps (
 
 CREATE TABLE pins (
   id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE,
   title VARCHAR(255) NOT NULL,
   latitude FLOAT NOT NULL,
   longitude FLOAT NOT NULL,
   description VARCHAR(255),
-  image_url TEXT,
+  image_url TEXT
 
 );
