@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "local": "./node_modules/.bin/nodemon -L --ignore public/",
+    "local": "./node_modules/.bin/nodemon -L --ignore public/ & npm run scss",
+    "scss": "sass --watch styles/style.scss public/styles/style.css",
     "db:reset": "node bin/resetdb.js"
   },
   "author": "Lighthouse Labs",
