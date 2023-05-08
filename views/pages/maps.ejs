@@ -1,0 +1,16 @@
+<body>
+    <%- include('../partials/_header') %>
+
+
+    <%= maps.name %>
+
+
+
+    <article>
+        <% for(var i=0; i < maps.length; i++) { %>
+           
+             <%= maps[i].name %>
+           
+        <% } %>
+    </article>
+</body>

@@ -6,8 +6,14 @@ router.get("/", (req, res) => {
   mapQueries
     .getMaps()
     .then((maps) => {
-      res.json({ maps });
-      res.send("This is maps page");
+      //   res.json({ maps });
+      //   res.send("This is maps page");
+      console.log("maps", maps);
+      const templateVars = {
+        // user: users[userId],
+        maps: maps,
+      };
+      res.render("pages/maps", templateVars);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
