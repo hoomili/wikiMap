@@ -1,16 +1,21 @@
 <body>
-    <%- include('../partials/_header') %>
+    <%- include('../partials/_head') %>
 
 
-    <%= maps.name %>
+    <h2>Popular Maps</h2>
 
-
-
-    <article>
-        <% for(var i=0; i < maps.length; i++) { %>
-           
-             <%= maps[i].name %>
-           
-        <% } %>
-    </article>
+    <div class="container">
+        <div class="row">
+                <% for(const map of maps) { %>           
+                <article class="col-lg-3">
+                    <figure>
+                        <img class="img-fluid rounded" src="<%= map.image_url %>" alt="<%= map.name %>" /> 
+                    </figure>
+                    <div>        
+                        <h3><%= map.name %></h3>
+                    </div>
+                </article>
+                <% } %>
+            </div>
+    </div>
 </body>
