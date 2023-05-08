@@ -13,7 +13,6 @@ getFavouriteMaps(req.params.id)
     };
     res.render('pages/profile', templateVars)
   })
-
 });
 
 
