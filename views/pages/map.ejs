@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= map.name %>
+  </title>
+</head>
+
+<body>
+  <h1>
+    <%= map.name %>
+  </h1>
+  <P>location: <%=map.city%>, <%=map.country%>
+  </P>
+  <P>Coordinates: Lat = <%=map.latitude%>, Lng = <%=map.longitude%>
+  </P>
+  <% for (let item of pins) {%>
+  <P><%= item.title%> <img src="<%=item.image_url%>" alt=""></P>
+  <%}%>
+  <img src="<%=map.image_url%>" alt="<%=map.city%>" width="600">
+  <h1>Google Map</h1>
+  <div id="map" style="height: 100%; width: 100%;"></div>
+  <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen
+    referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDdCP2-kJBZCgiLyItKN5M21Ju56wzzE-4
+    &q=<%=map.city%>">
+  </iframe>
+</body>
+
+</html>
