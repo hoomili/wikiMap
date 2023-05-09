@@ -58,7 +58,7 @@
         <div class="row">
           <% for (let i = 0; i < contributions.length; i++) { %>
             <article class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <a href="/maps/<%= favourites.map_id %>">
+                  <a href="/maps/<%= contributions[i].id %>">
                     <i class="fa-solid fa-heart"></i>
                     <figure>
                         <img class="img-fluid" src="<%= contributions[i].image_url%>" />
