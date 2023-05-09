@@ -17,10 +17,10 @@
       crossorigin="anonymous"
     />
 
-    <title>My Profile</title>
+    <title><%= favourites[0].username %>'s Profile</title>
   </head>
   <body>
-    <h1>My Profile</h1>
+    <h1><%= favourites[0].username %>'s Profile</h1>
     <div class="images_container">
       <% if (favourites.length > 0) { %>
       <h2>My favourite maps:</h2>
