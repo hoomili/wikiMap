@@ -1,59 +1,59 @@
 @use 'variables' as *;
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
+.nav-container {
+    margin: 0 auto;
+}
+.nav-link {
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 0;
 
-    .title {
-        font-weight: 600;
-        a {
-            color: $primary;
-
-            &:hover {
-                opacity: 0.8;  
-            }
-        }
+    &:hover {
+        color: $color!important;
     }
-    nav {
-        ul {
-            display: flex;
-            align-items: center;
-            gap: 46px;
-            font-size: 1.2rem;
-        }
-        .btn {
-            padding: 8px 20px;
-            background: $light;
-            font-size: 1.2rem;
-            border-radius: 6px;
-        }
+}
+.nav-link.nav-btn {
+    background: $light;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+.navbar-nav {
+    align-items: center;
+}
+.navbar-brand {
+    font-weight: 600!important;
+    color: $primary!important;
+    font-size: 1.4rem;
+}
+.btn {
+    background: $light;
+    font-size: 1rem;
+    padding: 8px 12px!important;
 
-        a {
-            color: $color;
-            font-weight: 600;
-            position: relative;
-
-            &.btn {
-                
-                font-size: 1rem;
-
-            }
-
-            &.active::after {   
-                position: absolute;
-                left: 0; 
-                bottom: 0;
-                content: '';       
-                width: 100%; 
-                height: 3px;
-                background: $primary;
-                }
-
-            &:hover {
-                opacity: 0.8;
-            }
-        }
+    &:hover {
+        opacity: 0.8;
+    }
+}
+@media (min-width: 992px) {
+    .nav-container {
+        max-width: 960px;
+        padding-top: 20px;
+    }
+    .nav-link:not(.btn) {
+        padding-right: 2.6rem!important;
+    }
+}
+@media (min-width: 1200px) {
+    .nav-container {
+        max-width: 1140px;
+        padding-top: 20px;
+    }
+}
+@media (max-width: 991px) {
+    nav.navbar {
+        background: #f8f9fa!important;
+    }
+    .nav-container {
+        width: 100%;
     }
 }
