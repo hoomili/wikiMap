@@ -1,0 +1,59 @@
+@use 'variables' as *;
+
+.nav-container {
+    margin: 0 auto;
+}
+.nav-link {
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 0;
+
+    &:hover {
+        color: $color!important;
+    }
+}
+.nav-link.nav-btn {
+    background: $light;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+.navbar-nav {
+    align-items: center;
+}
+.navbar-brand {
+    font-weight: 600!important;
+    color: $primary!important;
+    font-size: 1.4rem;
+}
+.btn {
+    background: $light;
+    font-size: 1rem;
+    padding: 8px 12px!important;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+@media (min-width: 992px) {
+    .nav-container {
+        max-width: 960px;
+        padding-top: 20px;
+    }
+    .nav-link:not(.btn) {
+        padding-right: 2.6rem!important;
+    }
+}
+@media (min-width: 1200px) {
+    .nav-container {
+        max-width: 1140px;
+        padding-top: 20px;
+    }
+}
+@media (max-width: 991px) {
+    nav.navbar {
+        background: #f8f9fa!important;
+    }
+    .nav-container {
+        width: 100%;
+    }
+}

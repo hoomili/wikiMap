@@ -1,0 +1,27 @@
+@use 'variables' as *;
+
+body {
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    color: $color;
+  }  
+ul {
+    list-style-type: none;
+}
+a {
+    color: $color;
+}
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+h2 {
+    font-weight: 600;
+    padding: 10px 0;
+}
+h3 {
+    font-size: 1.3rem;
+}
+section {
+    margin: 0 0 30px 0;
+}

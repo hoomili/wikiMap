@@ -1,0 +1,36 @@
+.images_container {
+  margin: 0 auto;
+  width: 90vw;
+
+}
+
+.row {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.square {
+  width: 18%;
+  margin: 10px;
+  text-align: center;
+}
+
+.square h2 {
+  font-size: small;
+}
+
+.square img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+h1 {
+  margin: 2px;
+  max-width: 1000px;
+}
