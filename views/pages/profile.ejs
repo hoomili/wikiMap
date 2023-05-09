@@ -5,55 +5,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" type="text/css">
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
     <link rel="stylesheet" href="/vendor/border-box.css" />
-    <link rel="stylesheet" href="/styles/main.css" />
-    <link rel="stylesheet" href="/styles/layout.css" />
-    <link rel="stylesheet" href="/styles/profiles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-
-    <title>My Profile</title>
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/maps.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <title>Wiki Map</title>
   </head>
-  <body>
-    <h1>My Profile</h1>
-    <div class="images_container">
-      <% if (favourites.length > 0) { %>
-      <h2>My favourite maps:</h2>
-        <div class="row">
-           <% for (let i = 0; i < favourites.length; i++) { %>
-           <div class="square">
-              <h2><%= favourites[i].name %></h2>
-              <img src="<%= favourites[i].image_url%>" />
-           </div>
-        <% } %>
-        </div>
-      <% } else { %>
 
-      <h2>My favourite maps:</h2>
-        <div class="row">
-          <div class="square">
-              No favourite maps found.
-              <img src = "https://www.iconpacks.net/icons/2/free-sad-face-icon-2691-thumb.png"/>
+  <body>
+    <%- include('../partials/header') %>
+    <% if (favourites.length > 0) { %>
+      <div class="wrapper">
+        <div class="container">
+        <h1><%= favourites[0].username %>'s Profile</h1>
+        <h2> <%= favourites[0].username %>'s favourite maps:</h2>
+          <div class="row">
+            <% for (let i = 0; i < favourites.length; i++) { %>
+              <article class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                  <a href="/maps/<%= favourites[i].map_id %>">
+                      <i class="fa-solid fa-heart"></i>
+                      <figure>
+                          <img class="img-fluid" src="<%= favourites[i].image_url%>" />
+                      </figure>
+                      <div>
+                          <h3><%= favourites[i].name %></h3>
+                      </div>
+                    </a>
+              </article>
+              <% }} else { %>
+                <h2> <%= favourites[0].username %>'s favourite maps:</h2>
+                  <div class="row">
+                    <div class="square">
+                        No favourite maps found.
+                        <img src = "https://www.iconpacks.net/icons/2/free-sad-face-icon-2691-thumb.png"/>
+                    </div>
+                <% } %>
+                  </div>
+              </div>
           </div>
-      <% } %>
-        </div>
-    </div>
-      <div class="images_container">
-      <h2>Maps I contributed to:</h2>
+      </div>
+  </div>
+  <% if (contributions.length > 0) { %>
+  <div class="wrapper">
+    <div class="container">
+      <h2> Maps <%=favourites[0].username %> contributed to:</h2>
         <div class="row">
           <% for (let i = 0; i < contributions.length; i++) { %>
-            <div class="square">
-              <h2><%= contributions[i].name %></h2>
-              <img src="<%= contributions[i].image_url%>" />
+            <article class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                <a href="/maps/<%= favourites.map_id %>">
+                    <i class="fa-solid fa-heart"></i>
+                    <figure>
+                        <img class="img-fluid" src="<%= contributions[i].image_url%>" />
+                    </figure>
+                    <div>
+                        <h3><%= contributions[i].name %></h3>
+                    </div>
+                  </a>
+            </article>
+            <% }} else { %>
+
+              <h2> Maps <%=favourites[0].username %> contributed to:</h2>
+                <div class="row">
+                  <div class="square">
+                      No  maps found.
+                      <img src = "https://www.iconpacks.net/icons/2/free-sad-face-icon-2691-thumb.png"/>
+                  </div>
+              <% } %>
+                </div>
             </div>
-          <% } %>
         </div>
     </div>
+</div>
+
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
