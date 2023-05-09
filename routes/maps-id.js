@@ -26,7 +26,15 @@ router.post("/", (req, res) => {
   const mapImage = req.body.image;
   const mapCity = req.body.city;
 
-  newMapQueries.addNewMap(mapTitle, mapCity, mapImage);
+  newMapQueries
+    .addNewMap(mapTitle, mapCity, mapImage)
+    .then(() => {
+      res.redirect("/maps");
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error 500");
+    });
 });
 
 // newMapQueries
