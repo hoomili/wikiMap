@@ -17,13 +17,13 @@
       crossorigin="anonymous"
     />
 
-    <title>My Profile</title>
+    <title><%= favourites[0].username %>'s Profile</title>
   </head>
   <body>
-    <h1>My Profile</h1>
+    <h1><%= favourites[0].username %>'s Profile</h1>
     <div class="images_container">
       <% if (favourites.length > 0) { %>
-      <h2>My favourite maps:</h2>
+      <h2> <%= favourites[0].username %>'s favourite maps:</h2>
         <div class="row">
            <% for (let i = 0; i < favourites.length; i++) { %>
            <div class="square">
@@ -34,7 +34,7 @@
         </div>
       <% } else { %>
 
-      <h2>My favourite maps:</h2>
+      <h2> <%= favourites[0].username %>'s favourite maps:</h2>
         <div class="row">
           <div class="square">
               No favourite maps found.
@@ -44,7 +44,7 @@
         </div>
     </div>
       <div class="images_container">
-      <h2>Maps I contributed to:</h2>
+      <h2>Maps <%=favourites[0].username %> contributed to:</h2>
         <div class="row">
           <% for (let i = 0; i < contributions.length; i++) { %>
             <div class="square">
