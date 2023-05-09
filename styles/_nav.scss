@@ -1,59 +1,11 @@
 @use 'variables' as *;
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-
-    .title {
-        font-weight: 600;
-        a {
-            color: $primary;
-
-            &:hover {
-                opacity: 0.8;  
-            }
-        }
-    }
-    nav {
-        ul {
-            display: flex;
-            align-items: center;
-            gap: 46px;
-            font-size: 1.2rem;
-        }
-        .btn {
-            padding: 8px 20px;
-            background: $light;
-            font-size: 1.2rem;
-            border-radius: 6px;
-        }
-
-        a {
-            color: $color;
-            font-weight: 600;
-            position: relative;
-
-            &.btn {
-                
-                font-size: 1rem;
-
-            }
-
-            &.active::after {   
-                position: absolute;
-                left: 0; 
-                bottom: 0;
-                content: '';       
-                width: 100%; 
-                height: 3px;
-                background: $primary;
-                }
-
-            &:hover {
-                opacity: 0.8;
-            }
-        }
-    }
+.navbar-brand {
+    font-weight: 600;
+    color: $primary;
 }
+.btn {
+    background: $light;
+}
+
+
