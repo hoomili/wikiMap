@@ -38,6 +38,7 @@ const usersRoutes = require("./routes/users");
 const mapsRoutes = require("./routes/maps");
 const profileRoutes = require("./routes/profiles");
 const newMapRoutes = require("./routes/new-map");
+// const newMapPostRoutes = require("./routes/new-map-api");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -52,6 +53,7 @@ app.use("/users", usersRoutes);
 app.use("/maps", mapsRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/new-map", newMapRoutes);
+// app.use("/map/:id", newMapPostRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
