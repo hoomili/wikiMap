@@ -19,8 +19,5 @@ router.get("/", (req, res) => {
       res.status(500).json({ error: err.message });
     });
 });
-router.get("/:id", (req, res) => {
-  res.end("HELLO");
-});
 
 module.exports = router;
