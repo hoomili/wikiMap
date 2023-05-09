@@ -37,6 +37,10 @@
     <div id="map"></div>
     <!-- <script defer src="/scripts/mapAPI.js"></script> -->
     <script>
+      const pin = []
+      <% for (let item of pins) {%>
+      pin.push({lat: <%=item.latitude%>, lng: <%= item.longitude%>})
+      <%}%>
       function initMap() {
       const position = { lat: <%=map.latitude %>, lng: <%=map.longitude %> };
       // The map, centered at Seattle
@@ -44,12 +48,10 @@
         zoom: 12,
         center: position,
       });
-      const coord1 = { lat: <%=pins[0].latitude %>, lng: <%=pins[0].longitude %> };
-      const coord2 = { lat: <%=pins[1].latitude %>, lng: <%=pins[1].longitude %> };
-      const coord3 = { lat: <%=pins[2].latitude %>, lng: <%=pins[2].longitude %> };
-      addMarker(coord1);
-      addMarker(coord2);
-      addMarker(coord3);
+      for (let i = 0; i < pin.length; i++) {
+        const coord1 = { lat: pin[i].lat, lng: pin[i].lng };
+        addMarker(coord1);
+      }
       function addMarker(coords) {
         const marker = new google.maps.Marker({
           position: coords,
