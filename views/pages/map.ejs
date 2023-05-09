@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,8 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMZlzN_-7l0Ogz_wkZL9Vdof9sQQ5FnsY&callback=initMap"
-    async></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%=ApiKey%>&callback=initMap" async></script>
     <style>
       #map {
         width: 600px;
@@ -27,36 +26,40 @@
   </P>
   <P>Coordinates: Lat = <%=map.latitude%>, Lng = <%=map.longitude%>
   </P>
+  <p>Helloooooooo     <%=pins[1].latitude %></p>
   <% for (let item of pins) {%>
     <P>
-      <%= item.title%> <img src="<%=item.image_url%>" alt="">
+      <%= item.title%>   <%= item.latitude%>   <%= item.longitude%>
     </P>
     <%}%>
     <img src="<%=map.image_url%>" alt="<%=map.city%>" width="600">
     <h1>Google Map</h1>
     <div id="map"></div>
-    <script src="../../api/google_map_connection.js"></script>
+    <!-- <script defer src="/scripts/mapAPI.js"></script> -->
+    <script>
+      function initMap() {
+      const position = { lat: <%=map.latitude %>, lng: <%=map.longitude %> };
+      // The map, centered at Seattle
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 12,
+        center: position,
+      });
+      const coord1 = { lat: <%=pins[0].latitude %>, lng: <%=pins[0].longitude %> };
+      const coord2 = { lat: <%=pins[1].latitude %>, lng: <%=pins[1].longitude %> };
+      const coord3 = { lat: <%=pins[2].latitude %>, lng: <%=pins[2].longitude %> };
+      addMarker(coord1);
+      addMarker(coord2);
+      addMarker(coord3);
+      function addMarker(coords) {
+        const marker = new google.maps.Marker({
+          position: coords,
+          map: map,
+        });
+      }
+
+
+    };
+    </script>
 
 </body>
 
-</html> -->
-<!DOCTYPE html>
-<html>
-<head>
-  <title>My Google Map</title>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMZlzN_-7l0Ogz_wkZL9Vdof9sQQ5FnsY&callback=initMap" async></script>
-  <style>
-    #map {
-      width: 600px;
-      height: 400px;
-    }
-  </style>
-</head>
-<body>
-  <h3>My Google Map</h3>
-  <!--The div element for the map -->
-  <div id="map"></div>
-  <script defer src="/scripts/mapAPI.js"></script>
-</body>
-</html>
