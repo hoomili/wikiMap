@@ -24,30 +24,32 @@
       <div class="wrapper">
         <div class="container">
         <h1><%= favourites[0].username %>'s Profile</h1>
-        <h2> <%= favourites[0].username %>'s favourite maps:</h2>
-          <div class="row">
-            <% for (let i = 0; i < favourites.length; i++) { %>
-              <article class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                  <a href="/maps/<%= favourites[i].map_id %>">
-                      <i class="fa-solid fa-heart"></i>
-                      <figure>
-                          <img class="img-fluid" src="<%= favourites[i].image_url%>" />
-                      </figure>
-                      <div>
-                          <h3><%= favourites[i].name %></h3>
-                      </div>
-                    </a>
-              </article>
-              <% }} else { %>
+        <section>
+          <h2> <%= favourites[0].username %>'s favourite maps:</h2>
+            <div class="row">
+             <% for (let i = 0; i < favourites.length; i++) { %>
+               <article class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                    <a href="/maps/<%= favourites[i].map_id %>">
+                       <i class="fa-solid fa-heart"></i>
+                        <figure>
+                            <img class="img-fluid" src="<%= favourites[i].image_url%>" />
+                        </figure>
+                        <div>
+                            <h3><%= favourites[i].name %></h3>
+                       </div>
+                     </a>
+               </article>
+               <% }} else { %>
                 <h2> <%= favourites[0].username %>'s favourite maps:</h2>
-                  <div class="row">
-                    <div class="square">
-                        No favourite maps found.
-                        <img src = "https://www.iconpacks.net/icons/2/free-sad-face-icon-2691-thumb.png"/>
+                    <div class="row">
+                     <div class="square">
+                          No favourite maps found.
+                          <img src = "https://www.iconpacks.net/icons/2/free-sad-face-icon-2691-thumb.png"/>
+                      </div>
+                 <% } %>
                     </div>
-                <% } %>
-                  </div>
-              </div>
+               </div>
+            </section>
           </div>
       </div>
   </div>
@@ -55,6 +57,7 @@
   <div class="wrapper">
     <div class="container">
       <h2> Maps <%=favourites[0].username %> contributed to:</h2>
+      <section>
         <div class="row">
           <% for (let i = 0; i < contributions.length; i++) { %>
             <article class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
@@ -78,6 +81,7 @@
               <% } %>
                 </div>
             </div>
+          </section>
         </div>
     </div>
 </div>
