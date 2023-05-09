@@ -4,7 +4,7 @@ const mapsQueries = require('../db/queries/maps');
 const pinsQueries = require('../db/queries/pins');
 
 router.get('/', (req, res) => {
-  let templateVar = {};
+  let templateVar = {ApiKey: process.env.API_KEY};
   mapsQueries.getMapData(req.params.id)
     .then(map => {
       templateVar.map = map[0];
