@@ -34,41 +34,32 @@
                         <figure>
                             <img class="img-fluid" src="<%= favourites[i].image_url%>" />
                         </figure>
-                        <div>
                             <h3><%= favourites[i].name %></h3>
-                       </div>
                      </a>
                </article>
                <% }} else { %>
                 <h2> <%= favourites[0].username %>'s favourite maps:</h2>
                     <div class="row">
-                     <div class="square">
+                      <div class="square">
                           No favourite maps found.
                           <img src = "https://www.iconpacks.net/icons/2/free-sad-face-icon-2691-thumb.png"/>
                       </div>
-                 <% } %>
                     </div>
-               </div>
-            </section>
-          </div>
-      </div>
-  </div>
-  <% if (contributions.length > 0) { %>
-  <div class="wrapper">
-    <div class="container">
-      <h2> Maps <%=favourites[0].username %> contributed to:</h2>
-      <section>
-        <div class="row">
-          <% for (let i = 0; i < contributions.length; i++) { %>
-            <article class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                  <% } %>
+            </div>
+        </section>
+        <% if (contributions.length > 0) { %>
+        <section>
+            <h2> Maps <%=favourites[0].username %> contributed to:</h2>
+            <div class="row">
+              <% for (let i = 0; i < contributions.length; i++) { %>
+              <article class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                   <a href="/maps/<%= contributions[i].id %>">
                     <i class="fa-solid fa-heart"></i>
                     <figure>
                         <img class="img-fluid" src="<%= contributions[i].image_url%>" />
                     </figure>
-                    <div>
                         <h3><%= contributions[i].name %></h3>
-                    </div>
                   </a>
             </article>
             <% }} else { %>
@@ -78,13 +69,13 @@
                       No  maps found.
                       <img src = "https://www.iconpacks.net/icons/2/free-sad-face-icon-2691-thumb.png"/>
                   </div>
-              <% } %>
                 </div>
+              <% } %>
             </div>
-          </section>
-        </div>
+        </section>
+      </div>
     </div>
-</div>
+
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
