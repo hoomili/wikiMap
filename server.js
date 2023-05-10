@@ -37,6 +37,7 @@ const mapsIDRoutes = require("./routes/maps-id");
 const mapsRoutes = require("./routes/maps");
 const profileRoutes = require("./routes/profiles");
 const newMapRoutes = require("./routes/new-map");
+const favouriteMapRoutes = require("./routes/favourites-api");
 const loginRoutes = require("./routes/login");
 // const newMapPostRoutes = require("./routes/new-map-api");
 
@@ -49,6 +50,7 @@ app.use("/maps/:id", mapsIDRoutes);
 app.use("/maps", mapsRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/new-map", newMapRoutes);
+app.use("/maps/favourite", favouriteMapRoutes);
 app.use("/login", loginRoutes);
 // app.use("/map/:id", newMapPostRoutes);
 // Note: mount other resources here, using the same pattern above
