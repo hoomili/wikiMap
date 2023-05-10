@@ -18,18 +18,45 @@ const getFavouriteMaps = function (id) {
   });
 
 };
-// const getMyContributions = function (id) {
-//   const queryString = `
-//   SELECT id, creator_id
-//   FROM maps
-//   WHERE id = creator_id`
 
-//   return db
-//   .query(query, [id, creator_id, maps.id])
-//   .then(data => {
-//     return data.rows;
-//   });
+const addFavouriteMap = function(userID, mapID) {
+  console.log(`Adding map ${mapID} to user ${userID}'s favorites.`);
 
-// };
+  const queryString = `
+    INSERT INTO favourite_maps (user_id, map_id)
+    VALUES ($1, $2);
+  `;
 
-module.exports = {getFavouriteMaps}
+  return db
+    .query(queryString, [userID, mapID])
+    .then((data) => {
+      console.log(`Map ${mapID} added to user ${userID}'s favorites.`);
+      return data.rows;
+    })
+    .catch((error) => {
+      console.log("Error adding map to favorites:", error);
+    });
+};
+
+const removeFavouriteMap = function(userID, mapID) {
+  console.log(`Removing map ${mapID} from user ${userID}'s favorites.`);
+
+  const queryString = `
+    DELETE FROM favourite_maps
+    WHERE user_id = $1 AND map_id = $2
+  `;
+
+  return db
+    .query(queryString, [userID, mapID])
+    .then((data) => {
+      console.log(`Map ${mapID} removed from user ${userID}'s favorites.`);
+      return data.rows;
+    })
+    .catch((error) => {
+      console.log("Error removing map from favorites:", error);
+    });
+};
+
+
+
+module.exports = {getFavouriteMaps, addFavouriteMap, removeFavouriteMap}
