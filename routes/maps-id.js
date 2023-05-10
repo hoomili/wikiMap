@@ -29,4 +29,8 @@ router.get("/new-pin", (req, res) => {
     })
 });
 
+router.post("/", (req, res) => {
+
+});
+
 module.exports = router;
