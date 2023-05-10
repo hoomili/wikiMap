@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/maps.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%=ApiKey%>&callback=initMap" async></script>
+    <title>Add New Map - Wiki Map</title>
+  </head>
+
+<body>
+    <%- include('../partials/header') %>
+   <div class="wrapper">
+        <div class="container">
+            <h2>Add a New Pin to <%=map.name%></h2>
+            <form action="/maps/<%=mapId%>" method="POST">
+                <div class="form-group mb-4">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Title">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" name="description" id="description" placeholder="Description">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="image">Image</label>
+                    <input type="text" class="form-control" name="image" id="image" placeholder="Image URL">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="latitude">Latitude</label>
+                    <input type="text" class="form-control" name="latitude" id="latitude" placeholder="Click on the map to get Latitude">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="longitude">Longitude</label>
+                    <input type="text" class="form-control" name="longitude" id="longitude" placeholder="Click on the map to get Longitude">
+                </div>
+                <div id="map"></div>
+                <button type="submit" class="btn btn-submit">Create</button>
+            </form>
+        </div>
+    </div>
+    <script>
+      function initMap() {
+        const myLatlng = { lat: <%=map.latitude%>, lng: <%=map.longitude%> };
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 10,
+          center: myLatlng,
+        });
+        // Create the initial InfoWindow.
+        let infoWindow = new google.maps.InfoWindow({
+          content: "Click the map to get Lat/Lng!",
+          position: myLatlng,
+        });
+
+        infoWindow.open(map);
+        // Configure the click listener.
+        map.addListener("click", (mapsMouseEvent) => {
+          // Close the current InfoWindow.
+          infoWindow.close();
+          // Create a new InfoWindow.
+          infoWindow = new google.maps.InfoWindow({
+            position: mapsMouseEvent.latLng,
+          });
+          infoWindow.setContent(
+            JSON.stringify(mapsMouseEvent.latLng, null, 2)
+            );
+            infoWindow.open(map);
+            document.getElementById("latitude").value = mapsMouseEvent.latLng.lat();
+            document.getElementById("longitude").value = mapsMouseEvent.latLng.lng();
+            console.log(mapsMouseEvent)
+          });
+      }
+      window.initMap = initMap;
+    </script>
+    <!-- <script src="scripts/new-pin.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
