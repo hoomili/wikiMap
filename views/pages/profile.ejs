@@ -30,7 +30,6 @@
              <% for (let i = 0; i < favourites.length; i++) { %>
                <article class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                     <a href="/maps/<%= favourites[i].map_id %>">
-                       <i class="fa-solid fa-heart"></i>
                         <figure>
                             <img class="img-fluid" src="<%= favourites[i].image_url%>" />
                         </figure>
@@ -38,24 +37,24 @@
                      </a>
                </article>
                <% }} else { %>
-                <h2> <%= favourites[0].username %>'s favourite maps:</h2>
-                    <div class="row">
-                      <div class="square">
-                          No favourite maps found.
-                          <img src = "https://www.iconpacks.net/icons/2/free-sad-face-icon-2691-thumb.png"/>
-                      </div>
-                    </div>
+                <div class="wrapper">
+                  <div class="container">
+                    <section>
+                        <h2> <%= contributions[0].creator_or_pinner_name %>'s favourite maps:</h2>
+                          <div class="row">
+                             <article class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <h3>No favourite maps found.</h3>
+                   </article>
                   <% } %>
             </div>
         </section>
         <% if (contributions.length > 0) { %>
         <section>
-            <h2> Maps <%=favourites[0].username %> contributed to:</h2>
+            <h2> Maps <%= contributions[0].creator_or_pinner_name %> contributed to:</h2>
             <div class="row">
               <% for (let i = 0; i < contributions.length; i++) { %>
               <article class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                   <a href="/maps/<%= contributions[i].id %>">
-                    <i class="fa-solid fa-heart"></i>
                     <figure>
                         <img class="img-fluid" src="<%= contributions[i].image_url%>" />
                     </figure>
@@ -63,7 +62,7 @@
                   </a>
             </article>
             <% }} else { %>
-              <h2> Maps <%=favourites[0].username %> contributed to:</h2>
+              <h2> Maps <%= contributions[0].creator_or_pinner_name %> contributed to:</h2>
                 <div class="row">
                   <div class="square">
                       No  maps found.

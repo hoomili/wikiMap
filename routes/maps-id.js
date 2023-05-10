@@ -5,7 +5,11 @@ const pinsQueries = require("../db/queries/pins");
 const newPinsQueries = require("../db/queries/new-pin");
 
 router.get("/", (req, res) => {
-  let templateVar = { ApiKey: process.env.API_KEY };
+  const userId = req.cookies.user_id;
+  const templateVar = {
+    ApiKey: process.env.API_KEY,
+    userId,
+  };
   mapsQueries
     .getMapData(req.params.id)
     .then((map) => {
