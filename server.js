@@ -5,7 +5,6 @@ require("dotenv").config();
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const morgan = require("morgan");
-const mapQueries = require("./db/queries/maps");
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -36,8 +35,7 @@ const mapsIDRoutes = require("./routes/maps-id");
 const mapsRoutes = require("./routes/maps");
 const profileRoutes = require("./routes/profiles");
 const newMapRoutes = require("./routes/new-map");
-const logoutRoutes = require("./routes/login");
-const loginRoutes = require("./routes/logout");
+const loginRoutes = require("./routes/login");
 // const newMapPostRoutes = require("./routes/new-map-api");
 
 // Mount all resource routes
@@ -53,7 +51,6 @@ app.use("/maps", mapsRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/new-map", newMapRoutes);
 app.use("/login", loginRoutes);
-app.use("/logout", logoutRoutes);
 // app.use("/map/:id", newMapPostRoutes);
 // Note: mount other resources here, using the same pattern above
 
@@ -62,18 +59,7 @@ app.use("/logout", logoutRoutes);
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  mapQueries
-    .getMaps()
-    .then((maps) => {
-      console.log("maps", maps);
-      const templateVars = {
-        maps,
-      };
-      res.render("pages/maps", templateVars);
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+  res.render("pages/index");
 });
 
 app.listen(PORT, () => {
