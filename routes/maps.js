@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
   mapQueries
     .getMaps()
     .then((maps) => {
-      console.log("maps", maps);
+      // console.log("maps", maps);
       const templateVars = {
         maps,
       };
@@ -22,9 +22,10 @@ router.post("/", (req, res) => {
   const mapTitle = req.body.title;
   const mapImage = req.body.image;
   const mapCity = req.body.city;
+  userID = '1';
 
   newMapQueries
-    .addNewMap(mapTitle, mapCity, mapImage)
+    .addNewMap(userID, mapTitle, mapCity, mapImage)
     .then(() => {
       res.redirect("/maps");
     })
