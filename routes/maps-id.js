@@ -5,14 +5,14 @@ const pinsQueries = require("../db/queries/pins");
 
 router.get("/", (req, res) => {
   const userId = req.cookies.user_id;
+  const templateVar = {
+    ApiKey: process.env.API_KEY,
+    userId,
+  };
   mapsQueries
     .getMapData(req.params.id)
     .then((map) => {
-      templateVar = {
-        ApiKey: process.env.API_KEY,
-        map: map[0],
-        userId,
-      };
+      templateVar.map = map[0];
       return pinsQueries.getPinsData(map[0].id);
     })
     .then((pins) => {
