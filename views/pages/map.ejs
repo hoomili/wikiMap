@@ -25,30 +25,36 @@
 
 <body>
   <%- include('../partials/header') %>
-  <section class="title">
-    <div>
-      <h1><%= map.name %> </h1>
-      <i class="fa-solid fa-heart"></i>
-      <i class="fa-regular fa-pen-to-square"></i>
-    </div>
-    <button type="button" class="add">+ Add New Point</button>
-  </section>
-
-  <main>
-    <div class="pins">
-      <% for (let item of pins) {%>
+  <div class="wrapper">
+    <div class="container">
+    <section class="d-flex flex-column flex-md-row justify-content-between align-items-start">
       <div>
-        <div class="pin">
-          <div class="description">
-            <h3><%= item.title%></h3>
-            <p><%= item.description%></p>
-          </div>
-          <img class="pinImg" src="<%= item.image_url%>" alt="<%= item.title%>">
-        </div>
+        <h2 class="d-inline"><%= map.name %> </h2><!-- change from h1 to h2, inline -->
+        <i class="fa-solid fa-heart"></i>
+        <i class="fa-regular fa-pen-to-square"></i>
       </div>
-      <%}%>
+      <button type="button" class="add">+ Add New Point</button>
+    </section>
+
+    <main class="d-flex flex-xl-row flex-lg-row flex-md-row flex-column-reverse">
+        <div class="pins">
+          <% for (let item of pins) {%>
+          <div>
+            <div class="pin d-flex justify-content-between">
+              <div class="description">
+                <h3><%= item.title%></h3>
+                <p><%= item.description%></p>
+              </div>
+              <figure>
+                <img class="pinImg" src="<%= item.image_url%>" alt="<%= item.title%>">
+              </figure>
+            </div>
+          </div>
+          <%}%>
+        </div>
+        <div id="map"></div>
+      </div>
     </div>
-    <div id="map"></div>
   </main>
 
 

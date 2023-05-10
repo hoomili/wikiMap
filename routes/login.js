@@ -15,21 +15,21 @@ router.get("/:id", (req, res) => {
 
   // send the user somewhere
 
-  getUserWithId(userId)
+  return getUserWithId(userId)
     .then((data) => {
-      console.log("data.id", data.id);
-      // return getFavouriteMaps(data.id)
+      return getFavouriteMaps(data.id).then((favourites) => {
+        console.log("favourites", favourites);
 
-      // return getFavouriteMaps(userId)
-      //   .then((favourites) => {
-      //     return getMyContributions(userId).then((contributions) => {
-      //       const templateVars = {
-      //         favourites: favourites,
-      //         contributions: contributions,
-      //       };
-      //       console.log("templateVars", templateVars);
-      //       res.render("pages/profile", templateVars);
-      //     });
+        //     return getMyContributions(userId).then((contributions) => {
+
+        //       const templateVars = {
+        //         favourites: favourites,
+        //         contributions: contributions,
+        //       };
+
+        //       // console.log("templateVars", templateVars);
+        //       res.render("pages/profile", templateVars);
+      });
     })
     .catch((err) => {
       console.error(err);
