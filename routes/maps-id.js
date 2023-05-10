@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 const mapsQueries = require("../db/queries/maps");
 const pinsQueries = require("../db/queries/pins");
+const newPinsQueries = require("../db/queries/new-pin");
 
 router.get("/", (req, res) => {
   let templateVar = { ApiKey: process.env.API_KEY };
@@ -30,7 +31,24 @@ router.get("/new-pin", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+  const data = {
+    map_id: req.params.id,
+    user_id: 2,
+    title: req.body.title,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude,
+    description: req.body.description,
+    image_url: req.body.image
+  }
 
+
+  newPinsQueries.addNewPin(data.user_id, data.map_id, data.title, data.latitude, data.longitude, data.description, data.image_url)
+    .then(() => {
+      res.redirect(`/maps/${req.params.id}`)
+    })
+
+
+  console.log(data)
 });
 
 module.exports = router;
