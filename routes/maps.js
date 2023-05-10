@@ -7,9 +7,9 @@ router.get("/", (req, res) => {
   mapQueries
     .getMaps()
     .then((maps) => {
-      // console.log("maps", maps);
       const templateVars = {
         maps,
+        userId: req.cookies.user_id,
       };
       res.render("pages/maps", templateVars);
     })
