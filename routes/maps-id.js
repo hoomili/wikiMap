@@ -4,6 +4,7 @@ const mapsQueries = require("../db/queries/maps");
 const pinsQueries = require("../db/queries/pins");
 const newPinsQueries = require("../db/queries/new-pin");
 
+
 router.get("/", (req, res) => {
   const userId = req.cookies.user_id;
   const templateVar = {
@@ -26,7 +27,8 @@ router.get("/", (req, res) => {
 });
 
 router.get("/new-pin", (req, res) => {
-  let templateVar = { ApiKey: process.env.API_KEY, mapId: req.params.id }
+  const userId = req.cookies.user_id;
+  let templateVar = { ApiKey: process.env.API_KEY, mapId: req.params.id, userId }
   mapsQueries.getMapData(req.params.id)
     .then((map) => {
       templateVar.map = map[0];
@@ -37,7 +39,7 @@ router.get("/new-pin", (req, res) => {
 router.post("/", (req, res) => {
   const data = {
     map_id: req.params.id,
-    user_id: 2,
+    user_id: req.cookies.user_id,
     title: req.body.title,
     latitude: req.body.latitude,
     longitude: req.body.longitude,
