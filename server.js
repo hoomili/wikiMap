@@ -35,20 +35,19 @@ const mapsIDRoutes = require("./routes/maps-id");
 const mapsRoutes = require("./routes/maps");
 const profileRoutes = require("./routes/profiles");
 const newMapRoutes = require("./routes/new-map");
+const loginRoutes = require("./routes/login");
 // const newMapPostRoutes = require("./routes/new-map-api");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use("/api/users", userApiRoutes);
-app.use("/api/widgets", widgetApiRoutes);
 app.use("/users", usersRoutes);
 app.use("/maps/:id", mapsIDRoutes);
-app.use("/api/users", userApiRoutes);
-app.use("/users", usersRoutes);
 app.use("/maps", mapsRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/new-map", newMapRoutes);
+app.use("/login", loginRoutes);
 // app.use("/map/:id", newMapPostRoutes);
 // Note: mount other resources here, using the same pattern above
 
