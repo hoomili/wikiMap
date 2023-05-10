@@ -20,4 +20,13 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/new-pin", (req, res) => {
+  let templateVar = { ApiKey: process.env.API_KEY, mapId: req.params.id }
+  mapsQueries.getMapData(req.params.id)
+    .then((map) => {
+      templateVar.map = map[0];
+      res.render("pages/new-pin", templateVar)
+    })
+});
+
 module.exports = router;
