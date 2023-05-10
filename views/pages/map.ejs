@@ -2,41 +2,64 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" type="text/css">
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/style.css" />
+  <link rel="stylesheet" href="/styles/maps.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=<%=ApiKey%>&callback=initMap" async></script>
-    <style>
-      #map {
-        width: 600px;
-        height: 400px;
-      }
-    </style>
+
   <title>
     <%= map.name %>
   </title>
 </head>
 
 <body>
-  <h1>
-    <%= map.name %>
-  </h1>
-  <P>location: <%=map.city%>, <%=map.country%>
-  </P>
-  <P>Coordinates: Lat = <%=map.latitude%>, Lng = <%=map.longitude%>
-  </P>
-  <p>Helloooooooo     <%=pins[1].latitude %></p>
-  <% for (let item of pins) {%>
-    <P>
-      <%= item.title%>   <%= item.latitude%>   <%= item.longitude%>
-    </P>
-    <%}%>
-    <img src="<%=map.image_url%>" alt="<%=map.city%>" width="600">
-    <h1>Google Map</h1>
+  <%- include('../partials/header') %>
+  <section class="title">
+    <div>
+      <h1><%= map.name %> </h1>
+      <i class="fa-solid fa-heart"></i>
+      <i class="fa-regular fa-pen-to-square"></i>
+    </div>
+    <button type="button" class="add">+ Add New Point</button>
+  </section>
+
+  <main>
+    <div class="pins">
+      <% for (let item of pins) {%>
+      <div>
+        <div class="pin">
+          <div class="description">
+            <h3><%= item.title%></h3>
+            <p><%= item.description%></p>
+          </div>
+          <img class="pinImg" src="<%= item.image_url%>" alt="<%= item.title%>">
+        </div>
+      </div>
+      <%}%>
+    </div>
     <div id="map"></div>
-    <!-- <script defer src="/scripts/mapAPI.js"></script> -->
+  </main>
+
+
+    <%- include('../partials/footer') %>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
+      const pin = []
+      <% for (let item of pins) {%>
+      pin.push({lat: <%=item.latitude%>, lng: <%= item.longitude%>, label: "<%= item.title%>"})
+      <%}%>
       function initMap() {
       const position = { lat: <%=map.latitude %>, lng: <%=map.longitude %> };
       // The map, centered at Seattle
@@ -44,20 +67,18 @@
         zoom: 12,
         center: position,
       });
-      const coord1 = { lat: <%=pins[0].latitude %>, lng: <%=pins[0].longitude %> };
-      const coord2 = { lat: <%=pins[1].latitude %>, lng: <%=pins[1].longitude %> };
-      const coord3 = { lat: <%=pins[2].latitude %>, lng: <%=pins[2].longitude %> };
-      addMarker(coord1);
-      addMarker(coord2);
-      addMarker(coord3);
-      function addMarker(coords) {
+      for (let i = 0; i < pin.length; i++) {
+        const coord1 = { lat: pin[i].lat, lng: pin[i].lng };
+        const label = pin[i].label
+        addMarker(coord1, label);
+      }
+      function addMarker(coords, lab) {
         const marker = new google.maps.Marker({
           position: coords,
           map: map,
+          title: lab
         });
       }
-
-
     };
     </script>
 
