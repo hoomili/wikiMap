@@ -42,11 +42,8 @@ const loginRoutes = require("./routes/login");
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use("/api/users", userApiRoutes);
-app.use("/api/widgets", widgetApiRoutes);
 app.use("/users", usersRoutes);
 app.use("/maps/:id", mapsIDRoutes);
-app.use("/api/users", userApiRoutes);
-app.use("/users", usersRoutes);
 app.use("/maps", mapsRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/new-map", newMapRoutes);
