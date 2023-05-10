@@ -5,6 +5,7 @@ require("dotenv").config();
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const morgan = require("morgan");
+const mapQueries = require("./db/queries/maps");
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -57,7 +58,18 @@ app.use("/new-map", newMapRoutes);
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("pages/index");
+  mapQueries
+    .getMaps()
+    .then((maps) => {
+      console.log("maps", maps);
+      const templateVars = {
+        maps,
+      };
+      res.render("pages/maps", templateVars);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
 app.listen(PORT, () => {
