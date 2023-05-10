@@ -58,7 +58,7 @@
     <script>
       const pin = []
       <% for (let item of pins) {%>
-      pin.push({lat: <%=item.latitude%>, lng: <%= item.longitude%>})
+      pin.push({lat: <%=item.latitude%>, lng: <%= item.longitude%>, label: "<%= item.title%>"})
       <%}%>
       function initMap() {
       const position = { lat: <%=map.latitude %>, lng: <%=map.longitude %> };
@@ -69,12 +69,14 @@
       });
       for (let i = 0; i < pin.length; i++) {
         const coord1 = { lat: pin[i].lat, lng: pin[i].lng };
-        addMarker(coord1);
+        const label = pin[i].label
+        addMarker(coord1, label);
       }
-      function addMarker(coords) {
+      function addMarker(coords, lab) {
         const marker = new google.maps.Marker({
           position: coords,
           map: map,
+          title: lab
         });
       }
     };
