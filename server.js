@@ -57,7 +57,7 @@ app.use("/new-map", newMapRoutes);
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("pages/index");
+  res.redirect("/maps");
 });
 
 app.listen(PORT, () => {
