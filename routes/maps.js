@@ -22,9 +22,10 @@ router.post("/", (req, res) => {
   const mapTitle = req.body.title;
   const mapImage = req.body.image;
   const mapCity = req.body.city;
+  userID = '1';
 
   newMapQueries
-    .addNewMap(mapTitle, mapCity, mapImage)
+    .addNewMap(userID, mapTitle, mapCity, mapImage)
     .then(() => {
       res.redirect("/maps");
     })
