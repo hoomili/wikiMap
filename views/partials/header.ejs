@@ -5,8 +5,8 @@
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        <% if(userId) { %>
+      <% if(userId) { %>
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" href="/profiles/<%= userId %>">Profile <span class="sr-only">(current)</span></a>
           </li>
@@ -15,12 +15,17 @@
           </li>
           <li class="nav-item">
             <a class="nav-link btn" href="#">Logout</a>
-        </li>
-        <% } else { %>
-          <li class="nav-item">          
-            <a class="nav-link btn" href="/profiles/1">Login</a>
-          </li>           
-        <% } %>
-      </ul>
+          </li>
+        </ul>
+      <% } else { %>
+        <form action="/login/1" method="GET" class="navbar-nav ml-auto">
+          <ul>
+            <li class="nav-item">          
+              <!-- <a >Login</a> -->
+              <button type="submit" class="nav-link btn">Login</button>
+            </li>           
+          </ul>  
+        </form>    
+      <% } %>
     </div>
   </nav>
