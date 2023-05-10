@@ -1,0 +1,68 @@
+@use 'variables' as *;
+.title {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem;
+}
+
+.title div{
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+.title div i {
+  padding-left: 1rem;
+}
+
+.add{
+  color: $color;
+  background-color: transparent;
+  font-weight: bolder;
+  border: none;
+  font-size: large;
+}
+main {
+  margin: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  height: 100%;
+
+}
+.pins {
+  display: flex;
+  flex-direction: column;
+}
+#map {
+  height: 100%;
+  min-height: 800px;
+  flex-grow: 1;
+  min-width: 300px;
+}
+.pin{
+  margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 0;
+  border-bottom: 1px solid $color;
+  padding-bottom: 1rem;
+  flex-grow: 2;
+}
+.description {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  margin-right: 1rem;
+  min-width: none;
+}
+.pinImg {
+  border-radius: 1rem;
+  border: 1px solid $color;
+  flex-grow: 1;
+  max-width: 120px;
+  min-width: 80px;
+  max-height: 120px;
+  min-height: 80px;
+}

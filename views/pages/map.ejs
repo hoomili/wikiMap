@@ -11,18 +11,13 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/style.css" />
-  <link rel="stylesheet" href="/styles/[page-specific-CSS].css" />
+  <link rel="stylesheet" href="/styles/maps.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=<%=ApiKey%>&callback=initMap" async></script>
-    <style>
-      #map {
-        width: 600px;
-        height: 400px;
-      }
-    </style>
+
   <title>
     <%= map.name %>
   </title>
@@ -30,28 +25,31 @@
 
 <body>
   <%- include('../partials/header') %>
-  <h1>
-    <%= map.name %>
-  </h1>
-  <P>location: <%=map.city%>, <%=map.country%>
-  </P>
-  <P>Coordinates: Lat = <%=map.latitude%>, Lng = <%=map.longitude%>
-  </P>
-  <p>Helloooooooo     <%=pins[1].latitude %></p>
-  <% for (let item of pins) {%>
-    <P>
-      <%= item.title%>   <%= item.latitude%>   <%= item.longitude%>
-    </P>
-    <%}%>
-    <img src="<%=map.image_url%>" alt="<%=map.city%>" width="600">
-    <h1>Google Map</h1>
+  <section class="title">
+    <div>
+      <h1><%= map.name %> </h1>
+      <i class="fa-solid fa-heart"></i>
+      <i class="fa-regular fa-pen-to-square"></i>
+    </div>
+    <button type="button" class="add">+ Add New Point</button>
+  </section>
+
+  <main>
+    <div class="pins">
+      <% for (let item of pins) {%>
+      <div>
+        <div class="pin">
+          <div class="description">
+            <h3><%= item.title%></h3>
+            <p><%= item.description%></p>
+          </div>
+          <img class="pinImg" src="<%= item.image_url%>" alt="<%= item.title%>">
+        </div>
+      </div>
+      <%}%>
+    </div>
     <div id="map"></div>
-
-
-
-
-
-
+  </main>
 
 
     <%- include('../partials/footer') %>
