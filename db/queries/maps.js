@@ -7,7 +7,7 @@ const getMapData = (mapId) => {
 };
 
 const getMaps = () => {
-  return db.query("SELECT * FROM maps;").then((data) => {
+  return db.query(`SELECT * FROM maps ORDER BY id DESC;`).then((data) => {
     return data.rows;
   });
 };

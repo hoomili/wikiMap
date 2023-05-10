@@ -33,6 +33,10 @@ figure {
 a:hover h3 {
   opacity: 0.7;
 }
+.btn-submit {
+  background: $primary!important;
+  color: #fff;
+}
 @media (min-width: 992px) { 
   article {
       margin: 0 0 30px 0;
