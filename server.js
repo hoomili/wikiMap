@@ -5,6 +5,7 @@ require("dotenv").config();
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -25,6 +26,7 @@ app.use(
   })
 );
 app.use(express.static("public"));
+app.use(cookieParser());
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -36,21 +38,20 @@ const mapsRoutes = require("./routes/maps");
 const profileRoutes = require("./routes/profiles");
 const newMapRoutes = require("./routes/new-map");
 const favouriteMapRoutes = require("./routes/favourites-api");
+const loginRoutes = require("./routes/login");
 // const newMapPostRoutes = require("./routes/new-map-api");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use("/api/users", userApiRoutes);
-app.use("/api/widgets", widgetApiRoutes);
 app.use("/users", usersRoutes);
 app.use("/maps/:id", mapsIDRoutes);
-app.use("/api/users", userApiRoutes);
-app.use("/users", usersRoutes);
 app.use("/maps", mapsRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/new-map", newMapRoutes);
 app.use("/maps/favourite", favouriteMapRoutes);
+app.use("/login", loginRoutes);
 // app.use("/map/:id", newMapPostRoutes);
 // Note: mount other resources here, using the same pattern above
 
