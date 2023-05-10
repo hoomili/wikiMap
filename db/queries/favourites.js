@@ -9,8 +9,6 @@ const getFavouriteMaps = function (id) {
   WHERE user_id = $1`;
 
   return db.query(queryString, [id]).then((data) => {
-    // console.log("queryString", queryString);
-    // console.log("id", id);
     return data.rows;
   });
 };
