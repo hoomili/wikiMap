@@ -18,7 +18,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%=ApiKey%>&callback=initMap" async></script>
   <title>
     <%= map.name %> | Wiki Map
   </title>
@@ -55,23 +54,17 @@
               </div>
               <figure>
                 <img class="pinImg" src="<%= item.image_url%>" alt="<%= item.title%>">
-              </figure>  
+              </figure>
             </div>
           </div>
           <%}%>
       </div>
-      <div id="map"></div>
+      <div id="map" class="map-detail"></div>
     </main>
   </div>
 </div>
 
     <%- include('../partials/footer') %>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
       <script>
         const pin = []
           <% for (let item of pins) {%>
@@ -79,17 +72,22 @@
             <%}%>
               function initMap() {
                 const position = { lat: <%=map.latitude %>, lng: <%=map.longitude %> };
-                const map = new google.maps.Map(document.getElementById("map"), {
-                  zoom: 12,
+                console.log('position:',position);
+                const map = new google.maps.Map(document.getElementById("map"),{
+                  zoom: 7,
                   center: position,
                 });
-                let latlngbounds = new google.maps.LatLngBounds();
+                console.log('pins length',pins.length);
+                if (pins.length > 0){
+                  console.log('im running');
+                  let latlngbounds = new google.maps.LatLngBounds(position);
                 for (let i = 0; i < pin.length; i++) {
                   const newCoord = new google.maps.LatLng(pin[i].lat, pin[i].lng);
                   const label = pin[i].label;
                   latlngbounds.extend(newCoord);
                   addMarker(newCoord, label);
                 }
+              }
                 map.fitBounds(latlngbounds);
                 function addMarker(coords, lab) {
                   const marker = new google.maps.Marker({
@@ -101,5 +99,12 @@
               };
               window.initMap = initMap;
       </script>
+       <script src="https://maps.googleapis.com/maps/api/js?key=<%=ApiKey%>&callback=initMap" async></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 </body>
