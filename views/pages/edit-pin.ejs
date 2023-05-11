@@ -59,30 +59,82 @@
           zoom: 10,
           center: myLatlng,
         });
-        // Create the initial InfoWindow.
-        let infoWindow = new google.maps.InfoWindow({
-          content: "Click the map to change the Lat/Lng!",
+
+        const marker = new google.maps.Marker({
           position: myLatlng,
+          map: map,
+          title: "New Pin",
+          draggable: true
+        });
+        // Create the initial InfoWindow.
+        // let infoWindow = new google.maps.InfoWindow({
+        //   content: "Click the map to change the Lat/Lng!",
+        //   position: myLatlng,
+        // });
+
+        // infoWindow.open(map);
+        // // Configure the click listener.
+        // map.addListener("click", (mapsMouseEvent) => {
+        //   // Close the current InfoWindow.
+        //   infoWindow.close();
+        //   // Create a new InfoWindow.
+        //   infoWindow = new google.maps.InfoWindow({
+        //     position: mapsMouseEvent.latLng,
+        //   });
+        //   // const marker = new google.maps.Marker({
+        //   // position: {lat: mapsMouseEvent.latLng.lat(), lng: mapsMouseEvent.latLng.lng()},
+        //   // map: map,
+        //   // });
+        //   infoWindow.setContent(
+        //     JSON.stringify(mapsMouseEvent.latLng, null, 2)
+        //     );
+        //     infoWindow.open(map);
+        //     document.getElementById("latitude").value = mapsMouseEvent.latLng.lat();
+        //     document.getElementById("longitude").value = mapsMouseEvent.latLng.lng();
+        //     console.log(mapsMouseEvent)
+        //   });
+
+        google.maps.event.addListener(marker, 'dragend', () => {
+          const latitude = marker.getPosition().lat();
+          const longitude = marker.getPosition().lng();
+          map.panTo(marker.getPosition());
+          document.getElementById("latitude").value = latitude;
+          document.getElementById("longitude").value = longitude;
         });
 
-        infoWindow.open(map);
-        // Configure the click listener.
+        google.maps.event.addListener(marker, 'drag', () => {
+          const latitude = marker.getPosition().lat();
+          const longitude = marker.getPosition().lng();
+          map.panTo(marker.getPosition());
+          document.getElementById("latitude").value = latitude;
+          document.getElementById("longitude").value = longitude;
+
+        });
+
+        // infoWindow.open(map);
+        // // Configure the click listener.
         map.addListener("click", (mapsMouseEvent) => {
           // Close the current InfoWindow.
-          infoWindow.close();
+          // infoWindow.close();
+
           // Create a new InfoWindow.
-          infoWindow = new google.maps.InfoWindow({
-            position: mapsMouseEvent.latLng,
-          });
-          infoWindow.setContent(
-            JSON.stringify(mapsMouseEvent.latLng, null, 2)
-            );
-            infoWindow.open(map);
-            document.getElementById("latitude").value = mapsMouseEvent.latLng.lat();
-            document.getElementById("longitude").value = mapsMouseEvent.latLng.lng();
-            console.log(mapsMouseEvent)
-          });
-      }
+          // const latitude = mapsMouseEvent.latLng.lat();
+          // const longitude = mapsMouseEvent.latLng.lng();
+          let newPosition = new google.maps.LatLng(mapsMouseEvent.latLng.lat(), mapsMouseEvent.latLng.lng());
+          marker.setPosition(newPosition);
+          map.panTo(newPosition);
+
+          // infoWindow.setContent(
+          //   JSON.stringify(mapsMouseEvent.latLng, null, 2)
+          // );
+          // infoWindow.open(map);
+          const latitude = marker.getPosition().lat();
+          const longitude = marker.getPosition().lng();
+          document.getElementById("latitude").value = latitude;
+          document.getElementById("longitude").value = longitude;
+        });
+
+      };
       window.initMap = initMap;
     </script>
     <!-- <script src="scripts/new-pin.js"></script> -->
