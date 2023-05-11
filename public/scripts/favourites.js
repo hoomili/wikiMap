@@ -1,20 +1,18 @@
 $(document).ready(() => {
   console.log('document is ready')
-  const userID = '1'
+
 
   $(".fa-solid.fa-heart").click((e) => {
     e.preventDefault();
     const isFavourited = !$(e.target).hasClass("favourited");
     const mapID = $(e.target).data("map-id");
     console.log('mapID:',mapID)
-    console.log('userID:', userID)
     console.log('isFavourited:', isFavourited)
 
     $(e.target).toggleClass("favourited", isFavourited);
     $.post({
-      url: "/maps/favourite",
+      url: "/favourite",
       data: {
-        userID: userID,
         mapID: mapID,
         isFavourited: isFavourited
       },
