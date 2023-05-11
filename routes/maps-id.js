@@ -63,8 +63,6 @@ router.post("/", (req, res) => {
     .then(() => {
       res.redirect(`/maps/${req.params.id}`);
     });
-
-  console.log(data);
 });
 
 module.exports = router;
