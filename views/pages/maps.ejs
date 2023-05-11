@@ -27,7 +27,10 @@
                 <% for(const map of maps) { %>
                 <article class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                     <a href="/maps/<%= map.id %>">
-                        <i class="fa-solid fa-heart" data-map-id="<%= map.id %>"></i>
+                      <% if (userId) { %>
+                        <% let isFavourited = userFavourites.some(fav => fav.map_id === map.id); %>
+                        <i class="fa-solid fa-heart <%= isFavourited ? 'favourited' : '' %>" data-map-id="<%= map.id %>"></i>
+                      <% } %>
                         <figure>
                             <img class="img-fluid" src="<%= map.image_url %>" alt="<%= map.name %>" />
                         </figure>

@@ -4,7 +4,7 @@ const  {addFavouriteMap, removeFavouriteMap}  = require("../db/queries/favourite
 
 router.post("/", (req, res) => {
   console.log('THIS IS req.body:', req.body)
-  const userID = req.body.userID;
+  const userID = req.cookies.user_id;
   const mapID = req.body.mapID;
   const isFavourited = req.body.isFavourited
 
