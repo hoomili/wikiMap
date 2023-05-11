@@ -23,9 +23,9 @@
     <% if (favourites.length > 0) { %>
       <div class="wrapper">
         <div class="container">
-        <h1><%= favourites[0].username %>'s Profile</h1>
+        <h1><%= contributions[0].creator_or_pinner_name %>'s Profile</h1>
         <section>
-          <h2> <%= favourites[0].username %>'s favourite maps:</h2>
+          <h2> <%= contributions[0].creator_or_pinner_name %>'s favourite maps:</h2>
             <div class="row">
              <% for (let i = 0; i < favourites.length; i++) { %>
                <article class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
@@ -39,6 +39,7 @@
                <% }} else { %>
                 <div class="wrapper">
                   <div class="container">
+                    <h1><%= contributions[0].creator_or_pinner_name %>'s Profile</h1>
                     <section>
                         <h2> <%= contributions[0].creator_or_pinner_name %>'s favourite maps:</h2>
                           <div class="row">
