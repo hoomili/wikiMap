@@ -2,6 +2,7 @@
 .title {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 2rem;
 }
 
@@ -9,9 +10,6 @@
   display: flex;
   justify-content: center;
   align-items: baseline;
-}
-.title div i {
-  padding-left: 1rem;
 }
 
 .add{
@@ -75,4 +73,17 @@ main {
   min-width: 80px;
   max-height: 120px;
   min-height: 80px;
+}
+#pinHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+}
+.btn-danger {
+  background-color: #dc3545;
 }
