@@ -23,12 +23,18 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+  console.log('reqbody:',req.body)
   const mapTitle = req.body.title;
   const mapImage = req.body.image;
   const mapCity = req.body.city;
   const userID = req.cookies.user_id;
+  const country = req.body.country;
+  const latitude = req.body.latitude;
+  const longitude = req.body.longitude;
 
-  addNewMap(userID, mapTitle, mapCity, mapImage)
+
+
+  addNewMap(userID, mapTitle, mapCity, mapImage, country, latitude, longitude)
     .then(() => {
       res.redirect("/maps");
     })
