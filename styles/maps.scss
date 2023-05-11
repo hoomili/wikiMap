@@ -2,6 +2,7 @@
 .title {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 2rem;
 }
 
@@ -72,4 +73,9 @@ main {
   min-width: 80px;
   max-height: 120px;
   min-height: 80px;
+}
+#pinHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 }

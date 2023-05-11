@@ -31,7 +31,9 @@
       <i class="fa-solid fa-heart"></i>
       <i class="fa-regular fa-pen-to-square"></i>
     </div>
-    <a class="add" href="/maps/<%=map.id%>/new-pin">+ Add New Point</a>
+    <div>
+      <a class="add" href="/maps/<%=map.id%>/new-pin">+ Add New Point</a>
+    </div>
   </section>
 
   <main>
@@ -40,7 +42,12 @@
       <div>
         <div class="pin">
           <div class="description">
-            <h3><%= item.title%></h3>
+            <div id="pinHeader">
+              <h3><%= item.title%></h3>
+              <a class="add" href="/maps/<%=map.id%>/pin/<%=item.id%>">
+                <i class="fa-regular fa-pen-to-square"></i>
+              </a>
+            </div>
             <p><%= item.description%></p>
           </div>
           <img class="pinImg" src="<%= item.image_url%>" alt="<%= item.title%>">
