@@ -1,6 +1,6 @@
 $(document).ready(() => {
   console.log('document is ready')
-  const userID = '1'
+  const userID = 1;
 
   $(".fa-solid.fa-heart").click((e) => {
     e.preventDefault();
@@ -12,7 +12,7 @@ $(document).ready(() => {
 
     $(e.target).toggleClass("favourited", isFavourited);
     $.post({
-      url: "/maps/favourite",
+      url: "/favourite",
       data: {
         userID: userID,
         mapID: mapID,

@@ -51,7 +51,7 @@ app.use("/maps/:id", mapsIDRoutes);
 app.use("/maps", mapsRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/new-map", newMapRoutes);
-app.use("/maps/favourite", favouriteMapRoutes);
+app.use("/favourite", favouriteMapRoutes);
 app.use("/login", loginRoutes);
 app.use("/logout", logoutRoutes);
 // app.use("/map/:id", newMapPostRoutes);
