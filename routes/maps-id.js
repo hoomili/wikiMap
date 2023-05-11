@@ -4,7 +4,8 @@ const mapsQueries = require("../db/queries/maps");
 const pinsQueries = require("../db/queries/pins");
 const newPinsQueries = require("../db/queries/new-pin");
 const singlePinQueries = require("../db/queries/get-pin");
-const editPinQueries = require("../db/queries/edit-pin")
+const editPinQueries = require("../db/queries/edit-pin");
+const deletePinQueries = require("../db/queries/delete-pin");
 
 
 router.get("/", (req, res) => {
@@ -91,14 +92,22 @@ router.post("/pins/:pinId/", (req, res) => {
   editPinQueries.updatePin(data)
     .then(() => {
     res.redirect(`/maps/${req.params.id}`);
-
   })
   .catch((err) => {
     res.status(500).json({ error: err.message });
   });
 });
-router.post("/pins/:pinId/delete", (req, res) => {
 
+
+
+router.post("/pins/:pinId/delete", (req, res) => {
+  deletePinQueries.deletePin(req.params.pinId)
+  .then(() => {
+    res.redirect(`/maps/${req.params.id}`);
+  })
+  .catch((err) => {
+    res.status(500).json({ error: err.message });
+  });
 });
 
 module.exports = router;
