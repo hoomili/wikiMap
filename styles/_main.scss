@@ -37,12 +37,17 @@ a:hover h3 {
   background: $primary!important;
   color: #fff;
 }
+// .footer-fixed {
+//   min-height: 100vh;
+//   position: relative;
+//   box-sizing: border-box;
+// }
 .footer {
+  // position: absolute;
+  // bottom: 0;
   background: $light;
   padding: 5px 0;
   font-size: 0.8rem;
-  // position: absolute;
-  // bottom: 0;
   width: 100%;
 
   .footer-label {
