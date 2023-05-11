@@ -4,7 +4,6 @@ const mapsQueries = require("../db/queries/maps");
 const pinsQueries = require("../db/queries/pins");
 const newPinsQueries = require("../db/queries/new-pin");
 
-
 router.get("/", (req, res) => {
   const userId = req.cookies.user_id;
   const templateVar = {
@@ -15,6 +14,7 @@ router.get("/", (req, res) => {
     .getMapData(req.params.id)
     .then((map) => {
       templateVar.map = map[0];
+      pageTitle = map[0].name;
       return pinsQueries.getPinsData(map[0].id);
     })
     .then((pins) => {
@@ -28,12 +28,15 @@ router.get("/", (req, res) => {
 
 router.get("/new-pin", (req, res) => {
   const userId = req.cookies.user_id;
-  let templateVar = { ApiKey: process.env.API_KEY, mapId: req.params.id, userId }
-  mapsQueries.getMapData(req.params.id)
-    .then((map) => {
-      templateVar.map = map[0];
-      res.render("pages/new-pin", templateVar)
-    })
+  let templateVar = {
+    ApiKey: process.env.API_KEY,
+    mapId: req.params.id,
+    userId,
+  };
+  mapsQueries.getMapData(req.params.id).then((map) => {
+    templateVar.map = map[0];
+    res.render("pages/new-pin", templateVar);
+  });
 });
 
 router.post("/", (req, res) => {
@@ -44,17 +47,22 @@ router.post("/", (req, res) => {
     latitude: req.body.latitude,
     longitude: req.body.longitude,
     description: req.body.description,
-    image_url: req.body.image
-  }
+    image_url: req.body.image,
+  };
 
-
-  newPinsQueries.addNewPin(data.user_id, data.map_id, data.title, data.latitude, data.longitude, data.description, data.image_url)
+  newPinsQueries
+    .addNewPin(
+      data.user_id,
+      data.map_id,
+      data.title,
+      data.latitude,
+      data.longitude,
+      data.description,
+      data.image_url
+    )
     .then(() => {
-      res.redirect(`/maps/${req.params.id}`)
-    })
-
-
-  console.log(data)
+      res.redirect(`/maps/${req.params.id}`);
+    });
 });
 
 module.exports = router;

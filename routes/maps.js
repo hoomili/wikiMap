@@ -1,21 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const mapQueries = require("../db/queries/maps");
-const newMapQueries = require("../db/queries/new-map");
+const { getMaps } = require("../db/queries/maps");
+const { addNewMap } = require("../db/queries/new-map");
 const { getFavouriteMaps } = require("../db/queries/favourites");
 
 router.get("/", (req, res) => {
   const userId = req.cookies.user_id;
 
-  Promise.all([
-    mapQueries.getMaps(),
-    getFavouriteMaps(userId)
-  ])
+  Promise.all([getMaps(), getFavouriteMaps(userId)])
     .then(([maps, userFavourites]) => {
       const templateVars = {
         maps,
         userId,
-        userFavourites
+        userFavourites,
+        pageTitle: "Maps",
       };
       res.render("pages/maps", templateVars);
     })
@@ -28,10 +26,9 @@ router.post("/", (req, res) => {
   const mapTitle = req.body.title;
   const mapImage = req.body.image;
   const mapCity = req.body.city;
-  const userID = req.cookies.user_id;;
+  const userID = req.cookies.user_id;
 
-  newMapQueries
-    .addNewMap(userID, mapTitle, mapCity, mapImage)
+  addNewMap(userID, mapTitle, mapCity, mapImage)
     .then(() => {
       res.redirect("/maps");
     })
