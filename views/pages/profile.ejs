@@ -15,9 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="/vendor/jquery-3.0.0.js"></script>
-    <title>Profile | Wiki Map</title>
+    <title><%= contributions[0].creator_or_pinner_name %>'s Profile | Wiki Map</title>
   </head>
-
   <body>
     <%- include('../partials/header') %>
     <% if (favourites.length > 0) { %>
@@ -75,7 +74,7 @@
         </section>
       </div>
     </div>
-
+    <%- include('../partials/footer') %>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
