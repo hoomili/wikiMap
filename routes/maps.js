@@ -17,7 +17,6 @@ router.get("/", (req, res) => {
         userId,
         userFavourites
       };
-      console.log(templateVars)
       res.render("pages/maps", templateVars);
     })
     .catch((err) => {
@@ -29,7 +28,7 @@ router.post("/", (req, res) => {
   const mapTitle = req.body.title;
   const mapImage = req.body.image;
   const mapCity = req.body.city;
-  userID = '1';
+  const userID = req.cookies.user_id;;
 
   newMapQueries
     .addNewMap(userID, mapTitle, mapCity, mapImage)
