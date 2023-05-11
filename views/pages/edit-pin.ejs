@@ -22,7 +22,7 @@
     <%- include('../partials/header') %>
    <div class="wrapper">
         <div class="container">
-            <h2>Edit <%=pin.title%></h2>
+            <h2>Edit <%=pin.title%> Pin In <%=pin.title%></h2>
             <form action="/maps/<%=mapId%>/pins/<%=pinId%>" method="POST">
                 <div class="form-group mb-4">
                     <label for="title">Title</label>
@@ -47,7 +47,6 @@
                 <div id="map"></div>
                 <div class="buttons">
                   <button type="submit" class="btn btn-submit">Edit Pin</button>
-                  form
                   <button type="submit" class="btn btn-danger" formaction="/maps/<%=mapId%>/pins/<%=pinId%>/delete">Delete</button>
                 </div>
             </form>
@@ -62,7 +61,7 @@
         });
         // Create the initial InfoWindow.
         let infoWindow = new google.maps.InfoWindow({
-          content: "Click the map to get Lat/Lng!",
+          content: "Click the map to change the Lat/Lng!",
           position: myLatlng,
         });
 
@@ -79,8 +78,8 @@
             JSON.stringify(mapsMouseEvent.latLng, null, 2)
             );
             infoWindow.open(map);
-            // document.getElementById("latitude").value = mapsMouseEvent.latLng.lat();
-            // document.getElementById("longitude").value = mapsMouseEvent.latLng.lng();
+            document.getElementById("latitude").value = mapsMouseEvent.latLng.lat();
+            document.getElementById("longitude").value = mapsMouseEvent.latLng.lng();
             console.log(mapsMouseEvent)
           });
       }

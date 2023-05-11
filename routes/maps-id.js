@@ -4,6 +4,7 @@ const mapsQueries = require("../db/queries/maps");
 const pinsQueries = require("../db/queries/pins");
 const newPinsQueries = require("../db/queries/new-pin");
 const singlePinQueries = require("../db/queries/get-pin");
+const editPinQueries = require("../db/queries/edit-pin")
 
 
 router.get("/", (req, res) => {
@@ -47,15 +48,10 @@ router.post("/pins", (req, res) => {
     description: req.body.description,
     image_url: req.body.image
   }
-
-
   newPinsQueries.addNewPin(data.user_id, data.map_id, data.title, data.latitude, data.longitude, data.description, data.image_url)
     .then(() => {
       res.redirect(`/maps/${req.params.id}`)
     })
-
-
-  console.log(data)
 });
 
 router.get("/pins/:pinId", (req, res) => {
@@ -70,13 +66,38 @@ router.get("/pins/:pinId", (req, res) => {
     .getPin(req.params.pinId)
     .then((pin) => {
       templateVar.pin = pin[0];
+      return mapsQueries.getMapData(templateVar.mapId)
+    })
+    .then((map) => {
+      templateVar.map = map[0];
       res.render("../views/pages/edit-pin", templateVar);
+
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
     });
 });
-router.get("/pins/:pinId/delete", (req, res) => {
+
+
+router.post("/pins/:pinId/", (req, res) => {
+  const data = {
+    title: req.body.title,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude,
+    description: req.body.description,
+    image_url: req.body.image,
+    pinId: req.params.pinId
+  }
+  editPinQueries.updatePin(data)
+    .then(() => {
+    res.redirect(`/maps/${req.params.id}`);
+
+  })
+  .catch((err) => {
+    res.status(500).json({ error: err.message });
+  });
+});
+router.post("/pins/:pinId/delete", (req, res) => {
 
 });
 
