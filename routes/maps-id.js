@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/new-pin", (req, res) => {
+router.get("/pins/new", (req, res) => {
   const userId = req.cookies.user_id;
   let templateVar = { ApiKey: process.env.API_KEY, mapId: req.params.id, userId }
   mapsQueries.getMapData(req.params.id)
@@ -37,7 +37,7 @@ router.get("/new-pin", (req, res) => {
     })
 });
 
-router.post("/", (req, res) => {
+router.post("/pins", (req, res) => {
   const data = {
     map_id: req.params.id,
     user_id: req.cookies.user_id,
@@ -58,7 +58,7 @@ router.post("/", (req, res) => {
   console.log(data)
 });
 
-router.get("/pin/:pinId", (req, res) => {
+router.get("/pins/:pinId", (req, res) => {
   const userId = req.cookies.user_id;
   const templateVar = {
     mapId: req.params.id,
@@ -76,6 +76,8 @@ router.get("/pin/:pinId", (req, res) => {
       res.status(500).json({ error: err.message });
     });
 });
+router.get("/pins/:pinId/delete", (req, res) => {
 
+});
 
 module.exports = router;
