@@ -35,6 +35,11 @@
         <a class="add" href="/maps/<%=map.id%>/pins/new">+ Add New Point</a>
     </section>
 
+
+    <% if (pins.length === 0) { %>
+      <div id="map" class="w-100"></div>
+    <% } %>
+
     <main class="d-flex flex-xl-row flex-lg-row flex-md-row flex-column-reverse">
       <div class="pins">
         <% for (let item of pins) {%>
@@ -83,6 +88,7 @@
                   zoom: 12,
                   center: position,
                 });
+                console.log('position', position)
                 let latlngbounds = new google.maps.LatLngBounds();
                 for (let i = 0; i < pin.length; i++) {
                   const newCoord = new google.maps.LatLng(pin[i].lat, pin[i].lng);
