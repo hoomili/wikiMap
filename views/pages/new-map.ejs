@@ -1,45 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      type="text/css"
+    />
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.ico?v=1.1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" type="text/css">
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
     <link rel="stylesheet" href="/vendor/border-box.css" />
     <link rel="stylesheet" href="/styles/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/maps.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
     <script src="/vendor/jquery-3.0.0.js"></script>
-    <title>Creat a New Map | Wiki Map</title>
+    <script
+      async
+      src="https://maps.googleapis.com/maps/api/js?key=<%=ApiKey%>&libraries=places&callback=handleScriptLoad"
+    ></script>
+
+    <title>Add New Map - Wiki Map</title>
   </head>
-    <body>
+
+  <body>
     <%- include('../partials/header') %>
     <div class="wrapper">
-            <div class="container">
-                <h2>Create a New Map</h2>
-                <form action="/maps" method="POST">
-                    <div class="form-group mb-4">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" name="title" id="title" placeholder="Title">
-                    </div>
-                    <div class="form-group mb-4">
-                        <label for="image">Image</label>
-                        <input type="text" class="form-control" name="image" id="image" placeholder="Image">
-                    </div>
-                    <div class="form-group mb-4">
-                        <label for="city">City</label>
-                        <input type="text" class="form-control" name="city" id="city" placeholder="City">
-                    </div>
-                    <button type="submit" class="btn btn-submit">Create</button>
-                </form>
-            </div>
-        </div>
-        <%- include('../partials/footer') %>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </body>
+      <div class="container">
+        <h2>Create a New Map</h2>
+        <form action="/maps" method="POST">
+          <div class="form-group mb-4">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              name="title"
+              id="title"
+              placeholder="Title"
+              required
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label for="image">Image</label>
+            <input
+              type="text"
+              class="form-control"
+              name="image"
+              id="image"
+              placeholder="Image"
+              required
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label for="city">City</label>
+            <input
+              type="text"
+              class="form-control"
+              name="city"
+              id="city"
+              placeholder="City"
+              autocomplete="on"
+              required
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label for="city">Country</label>
+            <input
+              type="text"
+              class="form-control"
+              name="country"
+              id="country"
+              placeholder="Country"
+              required
+            />
+          </div>
+          <div class="form-group mb-4" style="display:none;">
+            <label for="latitude">Latitude</label>
+            <input
+              type="text"
+              class="form-control"
+              name="latitude"
+              id="latitude"
+              placeholder="Select a city to auto-populate"
+              required
+            />
+          </div>
+          <div class="form-group mb-4" style="display:none;">
+            <label for="longitude">Longitude</label>
+            <input
+              type="text"
+              class="form-control"
+              name="longitude"
+              id="longitude"
+              placeholder="Select a city to auto-populate"
+              required
+            />
+          </div>
+          <div id="map"></div>
+          <button type="submit" class="btn btn-submit">Create</button>
+        </form>
+      </div>
+    </div>
+    <script>
+      let map;
+
+      function initMap() {
+        const myLatlng = { lat: 37.0902, lng: -95.7129 };
+        map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 1,
+          center: myLatlng,
+        });
+        // Create the initial InfoWindow.
+        let infoWindow = new google.maps.InfoWindow({
+          content: "Click the map to get Lat/Lng!",
+          position: myLatlng,
+        });
+
+        infoWindow.open(map);
+        // Configure the click listener.
+        map.addListener("click", (mapsMouseEvent) => {
+          // Close the current InfoWindow.
+          infoWindow.close();
+          // Create a new InfoWindow.
+          infoWindow = new google.maps.InfoWindow({
+            position: mapsMouseEvent.latLng,
+          });
+          infoWindow.setContent(JSON.stringify(mapsMouseEvent.latLng, null, 2));
+          infoWindow.open(map);
+          document.getElementById("latitude").value =
+            mapsMouseEvent.latLng.lat();
+          document.getElementById("longitude").value =
+            mapsMouseEvent.latLng.lng();
+          console.log(mapsMouseEvent);
+        });
+      }
+
+      function panTo(latitude, longitude, zoomLevel) {
+        const newPosition = new google.maps.LatLng(latitude, longitude);
+        map.setZoom(zoomLevel);
+        map.panTo(newPosition);
+      }
+
+      function initializeAutocomplete() {
+        console.log("intializing autocomplete");
+        //capture input data from HTML forms
+        const cityInput = document.getElementById("city");
+        const countryInput = document.getElementById("country");
+        const latitudeInput = document.getElementById("latitude");
+        const longitudeInput = document.getElementById("longitude");
+        const cityAutoComplete = new google.maps.places.Autocomplete(cityInput);
+
+        cityAutoComplete.addListener("place_changed", function () {
+          const city = cityAutoComplete.getPlace();
+          const addressComponents = city.address_components;
+          const countryComponent = addressComponents.find((component) =>
+            component.types.includes("country")
+          );
+
+          countryInput.value = countryComponent.long_name;
+          latitudeInput.value = city.geometry.location.lat();
+          longitudeInput.value = city.geometry.location.lng();
+
+          let newPosition = [
+            city.geometry.location.lat(),
+            city.geometry.location.lng(),
+          ];
+
+          panTo(newPosition[0], newPosition[1], 10);
+        });
+      }
+
+      function handleScriptLoad() {
+        initializeAutocomplete();
+        initMap();
+      }
+
+      window.handleScriptLoad = handleScriptLoad;
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
