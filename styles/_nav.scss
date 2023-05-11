@@ -50,7 +50,7 @@
     .nav-link {
         padding: 0.3rem 1rem;
 
-        &:not(.btn)::after {
+        &.active-page:not(.btn)::after {
             content: "";
             background: $primary;
             width: 100%;
