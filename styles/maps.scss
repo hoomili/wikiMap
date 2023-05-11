@@ -79,3 +79,11 @@ main {
   align-items: baseline;
   justify-content: space-between;
 }
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+}
+.btn-danger {
+  background-color: #dc3545;
+}

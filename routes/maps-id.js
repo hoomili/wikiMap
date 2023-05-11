@@ -3,7 +3,7 @@ const router = express.Router({ mergeParams: true });
 const mapsQueries = require("../db/queries/maps");
 const pinsQueries = require("../db/queries/pins");
 const newPinsQueries = require("../db/queries/new-pin");
-const singlePinQueries = require("../db/queries/edit-pin");
+const singlePinQueries = require("../db/queries/get-pin");
 
 
 router.get("/", (req, res) => {
@@ -61,10 +61,11 @@ router.post("/", (req, res) => {
 router.get("/pin/:pinId", (req, res) => {
   const userId = req.cookies.user_id;
   const templateVar = {
+    mapId: req.params.id,
+    pinId: req.params.pinId,
     ApiKey: process.env.API_KEY,
     userId,
   };
-  console.log(req.params)
   singlePinQueries
     .getPin(req.params.pinId)
     .then((pin) => {
