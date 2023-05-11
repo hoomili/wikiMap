@@ -110,24 +110,11 @@
           document.getElementById("longitude").value = longitude;
 
         });
-
-        // infoWindow.open(map);
-        // // Configure the click listener.
         map.addListener("click", (mapsMouseEvent) => {
-          // Close the current InfoWindow.
-          // infoWindow.close();
 
-          // Create a new InfoWindow.
-          // const latitude = mapsMouseEvent.latLng.lat();
-          // const longitude = mapsMouseEvent.latLng.lng();
           let newPosition = new google.maps.LatLng(mapsMouseEvent.latLng.lat(), mapsMouseEvent.latLng.lng());
           marker.setPosition(newPosition);
           map.panTo(newPosition);
-
-          // infoWindow.setContent(
-          //   JSON.stringify(mapsMouseEvent.latLng, null, 2)
-          // );
-          // infoWindow.open(map);
           const latitude = marker.getPosition().lat();
           const longitude = marker.getPosition().lng();
           document.getElementById("latitude").value = latitude;
