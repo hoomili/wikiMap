@@ -74,11 +74,15 @@
         zoom: 12,
         center: position,
       });
+      let latlngbounds = new google.maps.LatLngBounds();
       for (let i = 0; i < pin.length; i++) {
-        const coord1 = { lat: pin[i].lat, lng: pin[i].lng };
+        // const coord1 = { lat: pin[i].lat, lng: pin[i].lng };
+        const newCoord = new google.maps.LatLng(pin[i].lat, pin[i].lng)
         const label = pin[i].label
-        addMarker(coord1, label);
+        latlngbounds.extend(newCoord)
+        addMarker(newCoord, label);
       }
+      map.fitBounds(latlngbounds);
       function addMarker(coords, lab) {
         const marker = new google.maps.Marker({
           position: coords,
