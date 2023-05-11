@@ -1,38 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" type="text/css">
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/style.css" />
-  <link rel="stylesheet" href="/styles/maps.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%=ApiKey%>&callback=initMap" async></script>
-
-  <title>
-    <%= map.name %>
-  </title>
-</head>
-
-<body>
-  <%- include('../partials/header') %>
-  <section class="title">
-    <div>
-      <h1><%= map.name %> </h1>
-      <i class="fa-solid fa-heart"></i>
-      <i class="fa-regular fa-pen-to-square"></i>
-    </div>
-    <a class="add" href="/maps/<%=map.id%>/new-pin">+ Add New Point</a>
-  </section>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico?v=1.1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/maps.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%=ApiKey%>&callback=initMap" async></script>
+    <title><%= map.name %> | Wiki Map</title>
+  </head>
+  <body>
+    <%- include('../partials/header') %>
+    <section class="title">
+      <div>
+        <h1><%= map.name %> </h1>
+      </div>
+      <div>
+        <a class="add" href="/maps/<%=map.id%>/pins/new">+ Add New Point</a>
+      </div>
+    </section>
 
   <main>
     <div class="pins">
@@ -40,7 +35,12 @@
       <div>
         <div class="pin">
           <div class="description">
-            <h3><%= item.title%></h3>
+            <div id="pinHeader">
+              <h3><%= item.title%></h3>
+              <a class="add" href="/maps/<%=map.id%>/pins/<%=item.id%>">
+                <i class="fa-regular fa-pen-to-square"></i>
+              </a>
+            </div>
             <p><%= item.description%></p>
           </div>
           <img class="pinImg" src="<%= item.image_url%>" alt="<%= item.title%>">
@@ -62,16 +62,18 @@
       <%}%>
       function initMap() {
       const position = { lat: <%=map.latitude %>, lng: <%=map.longitude %> };
-      // The map, centered at Seattle
       const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
         center: position,
       });
+      let latlngbounds = new google.maps.LatLngBounds();
       for (let i = 0; i < pin.length; i++) {
-        const coord1 = { lat: pin[i].lat, lng: pin[i].lng };
+        const newCoord = new google.maps.LatLng(pin[i].lat, pin[i].lng)
         const label = pin[i].label
-        addMarker(coord1, label);
+        latlngbounds.extend(newCoord)
+        addMarker(newCoord, label);
       }
+      map.fitBounds(latlngbounds);
       function addMarker(coords, lab) {
         const marker = new google.maps.Marker({
           position: coords,
