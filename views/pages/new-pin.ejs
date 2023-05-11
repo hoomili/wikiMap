@@ -19,7 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=<%=ApiKey%>&callback=initMap" async></script>
-  <title>Add a New Pin | Wiki Map</title>
+  <title><%=pageTitle%> | Wiki Map</title>
 </head>
 
 <body>
@@ -41,12 +41,12 @@
             <label for="image">Image</label>
             <input type="text" class="form-control" name="image" id="image" placeholder="Image URL">
           </div>
-          <div class="form-group mb-4">
+          <div class="form-group mb-4 d-none">
             <label for="latitude">Latitude</label>
             <input type="text" class="form-control" name="latitude" id="latitude"
               placeholder="Click on the map to get Latitude">
           </div>
-          <div class="form-group mb-4">
+          <div class="form-group mb-4 d-none">
             <label for="longitude">Longitude</label>
             <input type="text" class="form-control" name="longitude" id="longitude"
               placeholder="Click on the map to get Longitude">

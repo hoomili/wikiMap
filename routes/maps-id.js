@@ -12,12 +12,13 @@ router.get("/", (req, res) => {
   const userId = req.cookies.user_id;
   const templateVar = {
     ApiKey: process.env.API_KEY,
-    userId,
+    userId
   };
   mapsQueries
     .getMapData(req.params.id)
     .then((map) => {
       templateVar.map = map[0];
+      templateVar.pageTitle = map[0].name;
       return pinsQueries.getPinsData(map[0].id);
     })
     .then((pins) => {
@@ -31,10 +32,15 @@ router.get("/", (req, res) => {
 
 router.get("/pins/new", (req, res) => {
   const userId = req.cookies.user_id;
-  let templateVar = { ApiKey: process.env.API_KEY, mapId: req.params.id, userId }
+  let templateVar = {
+    ApiKey: process.env.API_KEY,
+    mapId: req.params.id,
+    userId
+  }
   mapsQueries.getMapData(req.params.id)
     .then((map) => {
       templateVar.map = map[0];
+      templateVar.pageTitle = `Add New Pin`;
       res.render("pages/new-pin", templateVar)
     })
 });

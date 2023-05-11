@@ -23,15 +23,14 @@ body, html {
   height: 80%;
   width: 100%;
 }
-main {
-  margin: 2rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: start;
-  height: 100%;
+// main {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   align-items: start;
+//   height: 100%;
 
-}
+// }
 .pins {
   display: flex;
   flex-direction: column;
@@ -87,3 +86,4 @@ main {
 .btn-danger {
   background-color: #dc3545;
 }
+
