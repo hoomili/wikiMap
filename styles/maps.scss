@@ -41,7 +41,8 @@
   }
 
   .description {
-    flex-grow: 2;
+    flex: 1 0 0;
+
   }
 
   figure {
@@ -50,10 +51,11 @@
     border-radius: 6px;
     overflow: hidden;
     flex-grow: 1;
-    margin: 0 0 0 0;
+    margin: 0 0 0 0.5rem;
 
       .pinImg {
-        height: 100%;
+        height: 120px;
+        width: 120px;
         object-fit: cover;
       }
     }

@@ -44,7 +44,7 @@
                     <label for="longitude">Longitude</label>
                     <input type="text" class="form-control" name="longitude" id="longitude" placeholder="Click on the map to get Longitude" value="<%=pin.longitude%>">
                 </div>
-                <div id="map"></div>
+                <div id="map" class="map-pin"></div>
                 <div class="buttons">
                   <button type="submit" class="btn btn-submit">Edit Pin</button>
                   <button type="submit" class="btn btn-danger" formaction="/maps/<%=mapId%>/pins/<%=pinId%>/delete">Delete</button>
