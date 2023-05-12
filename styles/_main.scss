@@ -37,38 +37,6 @@ a:hover h3 {
   background: $primary!important;
   color: #fff;
 }
-// .footer-fixed {
-//   min-height: 100vh;
-//   position: relative;
-//   box-sizing: border-box;
-// }
-.footer {
-  // position: absolute;
-  // bottom: 0;
-  background: $light;
-  padding: 5px 0;
-  font-size: 0.8rem;
-  width: 100%;
-
-  .footer-label {
-    margin: 20px 0 5px 0;
-    padding-bottom: 0!important;
-    color: $color-light;
-  }
-
-  .footer-link {
-    color: $primary;
-  }
-  .footer-nav li:not(:last-child) a::after {
-    margin: 0 1rem;
-    content: "|";
-    width: 4px;
-    height: 100%;
-  }
-  
-
-
-}
 @media (min-width: 992px) {
   article {
       margin: 0 0 30px 0;

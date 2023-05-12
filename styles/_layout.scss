@@ -1,15 +1,45 @@
+@use 'variables' as *;
+
 body,
 html {
   margin: 0;
 }
+.footer-fix {
+  position: relative;
+}
+.footer {
+  background: $light;
+  padding: 5px 0;
+  font-size: 0.8rem;
+  width: 100%;
+
+  .footer-label {
+    margin: 20px 0 5px 0;
+    padding-bottom: 0!important;
+    color: $color-light;
+  }
+
+  .footer-link {
+    color: $primary;
+  }
+  .footer-nav li:not(:last-child) a::after {
+    margin: 0 1rem;
+    content: "|";
+    width: 4px;
+    height: 100%;
+  }
+}
 @media (min-width: 768px) {
   .wrapper {
     padding: 2rem 0 4rem 0;
-
+   }
+   .footer-bottom {
+    position: absolute;
+    bottom: 0;
    }
 }
 @media (max-width: 767px) {
   .wrapper {
-    padding: 1.5rem 0 3rem 0;
+    padding: 2rem 0;
    }
 }
