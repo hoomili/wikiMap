@@ -37,20 +37,6 @@
             <a class="add" href="/maps/<%=map.id%>/pins/new">+ Add New Point</a>
             <% } %>
         </section>
-
-    <main class="d-flex flex-xl-row flex-lg-row flex-md-row flex-column-reverse">
-      <div class="pins">
-        <% for (let item of pins) {%>
-          <div>
-            <h2 class="d-inline">
-              <%= map.name %>
-            </h2>
-          </div>
-          <% if (userId) { %>
-            <a class="add" href="/maps/<%=map.id%>/pins/new">+ Add New Point</a>
-            <% } %>
-        </section>
-
         <main class="d-flex flex-xl-row flex-lg-row flex-md-row flex-column-reverse">
           <div class="pins">
             <% for (let item of pins) {%>
