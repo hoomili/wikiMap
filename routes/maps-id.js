@@ -73,6 +73,7 @@ router.get("/pins/:pinId", (req, res) => {
     .getPin(req.params.pinId)
     .then((pin) => {
       templateVar.pin = pin[0];
+      templateVar.pageTitle = `Edit ${pin[0].title}`;
       return mapsQueries.getMapData(templateVar.mapId)
     })
     .then((map) => {
