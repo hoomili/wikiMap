@@ -38,33 +38,38 @@
             <% } %>
         </section>
         <main class="d-flex flex-xl-row flex-lg-row flex-md-row flex-column-reverse">
-          <div class="pins">
-            <% for (let item of pins) {%>
-              <div>
-                <div class="pin d-flex justify-content-between">
-                  <div class="description">
-                    <div id="pinHeader" class="d-flex align-items-center">
-                      <h3>
-                        <%= item.title%>
-                      </h3>
-                      <a href="/maps/<%=map.id%>/pins/<%=item.id%>">
-                        <% if (userId) { %>
-                          <i class="fa-regular fa-pen-to-square"></i>
-                        <% } %>
-                      </a>
+          <% if (pins.length !==0) { %>
+            <div class="pins">
+              <% for (let item of pins) {%>
+                <div>
+                  <div class="pin d-flex justify-content-between">
+                    <div class="description">
+                      <div id="pinHeader" class="d-flex align-items-center">
+                        <h3>
+                          <%= item.title%>
+                        </h3>
+                        <a href="/maps/<%=map.id%>/pins/<%=item.id%>">
+                          <% if (userId) { %>
+                            <i class="fa-regular fa-pen-to-square"></i>
+                            <% } %>
+                        </a>
+                      </div>
+                      <p>
+                        <%= item.description%>
+                      </p>
                     </div>
-                    <p>
-                      <%= item.description%>
-                    </p>
+                    <figure class="d-flex justify-content-between">
+                      <img class="pinImg" src="<%= item.image_url%>" alt="<%= item.title%>">
+                    </figure>
                   </div>
-                  <figure class="d-flex justify-content-between">
-                    <img class="pinImg" src="<%= item.image_url%>" alt="<%= item.title%>">
-                  </figure>
                 </div>
-              </div>
-              <%}%>
-          </div>
-          <div id="map" class="map-detail"></div>
+                <%}%>
+            </div>
+            <div id="map" class="map-detail"></div>
+            <% } else {%>
+              <div id="map" class="map-detail full-view"></div>
+            <%}%>
+
         </main>
       </div>
     </div>
